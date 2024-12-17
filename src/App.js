@@ -90,7 +90,6 @@ const App = () => {
         <div>
             <h1>Welcome to SleekFetch Logistics</h1>
             <p>Your reliable runner service for seamless online shopping.</p>
-            <img src="/images/Home.WEBP" alt="Runner in action" className="home-image" />
             <h2>User Management</h2>
             <input
                 type="text"
