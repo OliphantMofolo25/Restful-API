@@ -105,7 +105,7 @@ const App = () => {
                     <li key={u.id}>{u.name}</li>
                 ))}
             </ul>
-            <h2>Products</h2>
+            <h2>Products</h2>  
             <ul>
                 {Array.isArray(products) && products.map(p => (
                     <li key={p.id}>{p.name}</li>
