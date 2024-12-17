@@ -1,28 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './App.css';
+
 const App = () => {
-    const [orders, setOrders] = useState([]);
     const [users, setUsers] = useState([]);
     const [products, setProducts] = useState([]);
-    const [order, setOrder] = useState({ productId: '', userId: '' });
+    const [orders, setOrders] = useState([]);
+    const [user, setUser ] = useState({ name: '' });
+    const [error, setError] = useState('');
 
-    // Fetch orders from the Order Management API
-    const fetchOrders = async () => {
-        try {
-            const response = await axios.get('http://localhost:5003/orders');
-            if (Array.isArray(response.data)) {
-                setOrders(response.data);
-            } else {
-                console.error("Expected an array but got:", response.data);
-                setOrders([]); // Reset to empty array if not an array
-            }
-        } catch (error) {
-            console.error("Error fetching orders:", error);
-        }
-    };
-
-    // Fetch users from the User Management API
+    
     const fetchUsers = async () => {
         try {
             const response = await axios.get('http://localhost:5001/users');
@@ -30,14 +17,15 @@ const App = () => {
                 setUsers(response.data);
             } else {
                 console.error("Expected an array but got:", response.data);
-                setUsers([]); // Reset to empty array if not an array
+                setUsers([]);
             }
         } catch (error) {
             console.error("Error fetching users:", error);
+            setError("Failed to fetch users.");
         }
     };
 
-    // Fetch products from the Product Management API
+    
     const fetchProducts = async () => {
         try {
             const response = await axios.get('http://localhost:5002/products');
@@ -45,58 +33,72 @@ const App = () => {
                 setProducts(response.data);
             } else {
                 console.error("Expected an array but got:", response.data);
-                setProducts([]); // Reset to empty array if not an array
+                setProducts([]);
             }
         } catch (error) {
             console.error("Error fetching products:", error);
+            setError("Failed to fetch products.");
         }
     };
 
-    // Create a new order
-    const createOrder = async () => {
+    
+    const fetchOrders = async () => {
         try {
-            const response = await axios.post('http://localhost:5003/orders', order);
+            const response = await axios.get('http://localhost:5003/orders');
             if (Array.isArray(response.data)) {
-                setOrders(response.data); // Update orders with the response
+                setOrders(response.data);
             } else {
                 console.error("Expected an array but got:", response.data);
-                setOrders([]); // Reset to empty array if not an array
+                setOrders([]);
             }
-            setOrder({ productId: '', userId: '' }); // Clear input
         } catch (error) {
-            console.error("Error creating order:", error);
+            console.error("Error fetching orders:", error);
+            setError("Failed to fetch orders.");
         }
     };
 
-    // Fetch data when the component mounts
+
+    const createUser  = async () => {
+        if (!user.name.trim()) {
+            setError("User  name cannot be empty.");
+            return;
+        }
+        try {
+            const response = await axios.post('http://localhost:5001/users', user);
+            if (Array.isArray(response.data)) {
+                setUsers(response.data);
+            } else {
+                console.error("Expected an array but got:", response.data);
+                setUsers([]);
+            }
+            setUser ({ name: '' });
+            setError(''); 
+        } catch (error) {
+            console.error("Error creating user:", error);
+            setError("Failed to create user.");
+        }
+    };
+
+    
     useEffect(() => {
-        fetchOrders();
         fetchUsers();
         fetchProducts();
+        fetchOrders();
     }, []);
 
     return (
-        <div>
-            <h1>Order Management</h1>
+        <div className="container">
+            <h1>Sleek Fetch Logistics</h1>
+            <p>Your reliable runner service for seamless online shopping.</p>
+            <h2>User Management</h2>
             <input
                 type="text"
-                placeholder="Product ID"
-                value={order.productId}
-                onChange={(e) => setOrder({ ...order, productId: e.target.value })}
+                placeholder="User  Name"
+                value={user.name}
+                onChange={(e) => setUser ({ name: e.target.value })}
             />
-            <input
-                type="text"
-                placeholder="User  ID"
-                value={order.userId}
-                onChange={(e) => setOrder({ ...order, userId: e.target.value })}
-            />
-            <button onClick={createOrder}>Add Order</button>
-            <h2>Orders</h2>
-            <ul>
-                {Array.isArray(orders) && orders.map(o => (
-                    <li key={o.id}>Order for Product ID: {o.productId} by User ID: {o.userId}</li>
-                ))}
-            </ul>
+            <button onClick={createUser }>Add User</button>
+            {error && <p className="error">{error}</p>} {/* Display error message */}
             <h2>Users</h2>
             <ul>
                 {Array.isArray(users) && users.map(u => (
@@ -107,6 +109,12 @@ const App = () => {
             <ul>
                 {Array.isArray(products) && products.map(p => (
                     <li key={p.id}>{p.name}</li>
+                ))}
+            </ul>
+            <h2>Orders</h2>
+            <ul>
+                {Array.isArray(orders) && orders.map(o => (
+                    <li key={o.id}>Order for Product ID: {o.productId} by User ID: {o.userId}</li>
                 ))}
             </ul>
         </div>
