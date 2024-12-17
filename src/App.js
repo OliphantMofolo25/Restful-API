@@ -7,20 +7,21 @@ const App = () => {
     const [products, setProducts] = useState([]);
     const [orders, setOrders] = useState([]);
     const [user, setUser ] = useState({ name: '' });
+    const [error, setError] = useState('');
 
     // Fetch users from the User Management API
     const fetchUsers = async () => {
         try {
             const response = await axios.get('http://localhost:5001/users');
-            // Ensure the response is an array
             if (Array.isArray(response.data)) {
                 setUsers(response.data);
             } else {
                 console.error("Expected an array but got:", response.data);
-                setUsers([]); // Reset to empty array if not an array
+                setUsers([]);
             }
         } catch (error) {
             console.error("Error fetching users:", error);
+            setError("Failed to fetch users.");
         }
     };
 
@@ -36,6 +37,7 @@ const App = () => {
             }
         } catch (error) {
             console.error("Error fetching products:", error);
+            setError("Failed to fetch products.");
         }
     };
 
@@ -51,22 +53,29 @@ const App = () => {
             }
         } catch (error) {
             console.error("Error fetching orders:", error);
+            setError("Failed to fetch orders.");
         }
     };
 
     // Create a new user
     const createUser  = async () => {
+        if (!user.name.trim()) {
+            setError("User  name cannot be empty.");
+            return;
+        }
         try {
             const response = await axios.post('http://localhost:5001/users', user);
             if (Array.isArray(response.data)) {
-                setUsers(response.data); // Update users with the response
+                setUsers(response.data);
             } else {
                 console.error("Expected an array but got:", response.data);
                 setUsers([]);
             }
             setUser ({ name: '' }); // Clear input
+            setError(''); // Clear any previous error
         } catch (error) {
             console.error("Error creating user:", error);
+            setError("Failed to create user.");
         }
     };
 
@@ -80,8 +89,8 @@ const App = () => {
     return (
         <div>
             <h1>Welcome to SleekFetch Logistics</h1>
-                    <p>Your reliable runner service for seamless online shopping.</p>
-                    <img src="/images/Home.WEBP" alt="Runner in action" className="home-image" />
+            <p>Your reliable runner service for seamless online shopping.</p>
+            <img src="/images/Home.WEBP" alt="Runner in action" className="home-image" />
             <h2>User Management</h2>
             <input
                 type="text"
@@ -90,6 +99,7 @@ const App = () => {
                 onChange={(e) => setUser ({ name: e.target.value })}
             />
             <button onClick={createUser }>Add User</button>
+            {error && <p className="error">{error}</p>} {/* Display error message */}
             <h2>Users</h2>
             <ul>
                 {Array.isArray(users) && users.map(u => (

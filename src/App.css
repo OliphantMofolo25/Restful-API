@@ -1,20 +1,29 @@
+:root {
+  --background-color: #2c2c2c;
+  --text-color: #e0e0e0;
+  --header-color: #d8a9a1;
+  --hover-color: #b97a7a;
+  --section-background: #3a3a3a;
+  --error-color: #ff4d4d; /* Red for error messages */
+}
+
 body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #2c2c2c; /* Dark Charcoal background */
-  color: #e0e0e0; /* Light Gray text */
+  background-color: var(--background-color);
+  color: var(--text-color);
 }
 
 header {
-  background-color: #d8a9a1; /* Rose Gold header */
+  background-color: var(--header-color);
   color: #333;
   padding: 20px;
   text-align: center;
 }
 
 nav {
-  margin-top: 20px; /* Margin for the navigation */
+  margin-top: 20px;
 }
 
 nav ul {
@@ -27,20 +36,20 @@ nav ul {
 }
 
 nav ul li {
-  margin: 0 20px; /* Margin between menu items */
+  margin: 0 20px;
   position: relative;
 }
 
 nav ul li a {
-  color: #e0e0e0; /* Light Gray text for menu items */
+  color: var(--text-color);
   text-decoration: none;
   font-weight: bold;
-  font-size: 18px; /* Font size for menu items */
-  transition: color 0.3s ease; /* Smooth transition for hover effect */
+  font-size: 18px;
+  transition: color 0.3s ease;
 }
 
 nav ul li a:hover {
-  color: #b97a7a; /* Darker Rose Gold on hover */
+  color: var(--hover-color);
 }
 
 main {
@@ -52,11 +61,11 @@ main {
 .intro {
   text-align: center;
   padding: 20px;
-  background-color: #3a3a3a; /* Darker shade for sections */
-  border: 2px solid #d8a9a1; /* Rose Gold border */
+  background-color: var(--section-background);
+  border: 2px solid var(--header-color);
   border-radius: 10px;
   margin-bottom: 30px;
-  max-width: 800px; /* Limit width of the intro section */
+  max-width: 800px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -64,18 +73,18 @@ main {
 .intro h2 {
   font-size: 2.5em;
   margin-bottom: 15px;
-  color: #d8a9a1; /* Rose Gold */
-  transition: color 0.3s ease; /* Smooth transition for hover effect */
+  color: var(--header-color);
+  transition: color 0.3s ease;
 }
 
 .intro h2:hover {
-  color: #007bff; /* Muted Blue on hover */
+  color: #007bff;
 }
 
 .intro p {
   font-size: 1.2em;
   margin-bottom: 20px;
-  color: #e0e0e0; /* Light Gray text */
+  color: var(--text-color);
 }
 
 .home-image {
@@ -87,22 +96,22 @@ main {
 section {
   margin-bottom: 30px;
   padding: 20px;
-  background-color: #3a3a3a; /* Darker Gray for sections */
+  background-color: var(--section-background);
   text-align: center;
-  border: 2px solid #d8a9a1; /* Rose Gold border */
+  border: 2px solid var(--header-color);
   border-radius: 8px;
-  max-width: 800px; /* Limit width of the sections */
+  max-width: 800px;
   margin-left: auto;
   margin-right: auto;
 }
 
 section h2 {
-  color: #007bff; /* Muted Blue for section headings */
-  transition: color 0.3s ease; /* Smooth transition for hover effect */
+  color: #007bff;
+  transition: color 0.3s ease;
 }
 
 section h2:hover {
-  color: #d8a9a1; /* Rose Gold on hover */
+  color: var(--header-color);
 }
 
 .content {
@@ -113,7 +122,7 @@ section h2:hover {
 }
 
 .section-image {
-  max-width: 200px; /* Limit width of the images in sections */
+  max-width: 200px;
   height: auto;
   border-radius: 8px;
   margin: 0 20px;
@@ -123,7 +132,7 @@ section h2:hover {
   list-style-type: disc;
   margin: 0;
   text-align: left;
-  color: #e0e0e0; /* Light Gray text for list items */
+  color: var(--text-color);
 }
 
 .content ul li {
@@ -133,7 +142,7 @@ section h2:hover {
 footer {
   text-align: center;
   padding: 15px;
-  background-color: #d8a9a1; /* Rose Gold footer */
+  background-color: var(--header-color);
   color: #333;
 }
 
@@ -145,32 +154,6 @@ footer {
 .dropdown-content {
   display: none;
   position: absolute;
-  background-color: #cb7ebb; /* Updated to match theme */
+  background-color: #cb7ebb;
   min-width: 160px;
-  z-index: 1;
-  border-radius: 8px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-}
-
-.dropdown-content a {
-  color: rgb(241, 221, 232); /* Light color for text */
-  padding: 14px 16px;
-  text-decoration: none;
-  display: block; /* Full-width links */
-  text-align: center;
-  transition: background-color 0.3s ease;
-}
-
-.dropdown-content a:hover {
-  background-color: #ecb3d0; /* Muted Blue on hover */
-}
-
-.dropdown:hover .dropdown-content {
-  display:block;
-
-}
-
-.dropdown:hover > a {
-  background-color: #d8a1c7; /* Rose Gold for dropdown button on hover */
-  color: #333;
-}
+  z-index: 
