@@ -1,186 +1,76 @@
 :root {
-  --background-color: #2c2c2c;
-  --text-color: #e0e0e0;
-  --header-color: #d8a9a1;
-  --hover-color: #b97a7a;
-  --section-background: #3a3a3a;
+  --background-color: #f4f4f4;
+  --text-color: #333;
+  --header-color: #28a745;
   --error-color: #ff4d4d; 
 }
 
 body {
-  font-family: Arial, sans-serif;
-  margin: 0;
+  font-family: Arial, sans-serif margin: 0;
   padding: 0;
   background-color: var(--background-color);
   color: var(--text-color);
 }
 
-header {
-  background-color: var(--header-color);
-  color: #333;
-  padding: 20px;
-  text-align: center;
+.container {
+  max-width: 800px; 
+  margin: 0 auto; 
+  background: #fff; 
+  padding: 20px; 
+  border-radius: 8px; 
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
 }
 
-nav {
-  margin-top: 20px;
-}
-
-nav ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-nav ul li {
-  margin: 0 20px;
-  position: relative;
-}
-
-nav ul li a {
-  color: var(--text-color);
-  text-decoration: none;
-  font-weight: bold;
-  font-size: 18px;
-  transition: color 0.3s ease;
-}
-
-nav ul li a:hover {
-  color: var(--hover-color);
-}
-
-main {
-  margin: 0 auto;
-  max-width: 1200px;
-  padding: 20px;
-}
-
-.intro {
-  text-align: center;
-  padding: 20px;
-  background-color: var(--section-background);
-  border: 2px solid var(--header-color);
-  border-radius: 10px;
-  margin-bottom: 30px;
-  max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.intro h2 {
-  font-size: 2.5em;
-  margin-bottom: 15px;
+h1 {
   color: var(--header-color);
-  transition: color 0.3s ease;
+  text-align: center; 
+  margin-bottom: 10px; 
 }
 
-.intro h2:hover {
-  color: #007bff;
+h2 {
+  color: #555;
+  margin-top: 20px; 
 }
 
-.intro p {
-  font-size: 1.2em;
-  margin-bottom: 20px;
-  color: var(--text-color);
+p {
+  text-align: center; 
+  color: #666; 
+  margin-bottom: 20px; 
 }
 
-.home-image {
-  max-width: 60%;
-  height: auto;
-  border-radius: 8px;
-}
-
-section {
-  margin-bottom: 30px;
-  padding: 20px;
-  background-color: var(--section-background);
-  text-align: center;
-  border: 2px solid var(--header-color);
-  border-radius: 8px;
-  max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-section h2 {
-  color: #007bff;
-  transition: color 0.3s ease;
-}
-
-section h2:hover {
-  color: var(--header-color);
-}
-
-.content {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.section-image {
-  max-width: 200px;
-  height: auto;
-  border-radius: 8px;
-  margin: 0 20px;
-}
-
-.content ul {
-  list-style-type: disc;
-  margin: 0;
-  text-align: left;
-  color: var(--text-color);
-}
-
-.content ul li {
+input[type="text"] {
+  padding: 10px;
   margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: calc(100% - 22px); 
 }
 
-footer {
-  text-align: center;
-  padding: 15px;
+button {
+  padding: 10px 15px;
   background-color: var(--header-color);
-  color: #333;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s; 
 }
 
-.dropdown {
-  position: relative;
-  display: inline-block;
+button:hover {
+  background-color: #218838; 
 }
 
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #cb7ebb;
-  min-width: 160px;
-  z-index:  1;
-  border-radius: 8px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+ul {
+  list-style-type: none;
+  padding: 0;
 }
 
-.dropdown-content a {
-  color: rgb(241, 221, 232);
-  padding: 14px 16px;
-  text-decoration: none;
-  display: block;
-  text-align: center;
-  transition: background-color 0.3s ease;
-}
-
-.dropdown-content a:hover {
-  background-color: #ecb3d0;
-}
-
-.dropdown:hover .dropdown-content {
-  display: block;
-}
-
-.dropdown:hover > a {
-  background-color: #d8a1c7;
-  color: #333;
+li {
+  background: white;
+  margin: 5px 0;
+  padding: 10px;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .error {
@@ -188,4 +78,5 @@ footer {
   font-weight: bold;
   text-align: center;
   margin-top: 10px;
+ ```css
 }

@@ -9,7 +9,7 @@ const App = () => {
     const [user, setUser ] = useState({ name: '' });
     const [error, setError] = useState('');
 
-    // Fetch users from the User Management API
+    
     const fetchUsers = async () => {
         try {
             const response = await axios.get('http://localhost:5001/users');
@@ -25,7 +25,7 @@ const App = () => {
         }
     };
 
-    // Fetch products from the Product Management API
+    
     const fetchProducts = async () => {
         try {
             const response = await axios.get('http://localhost:5002/products');
@@ -41,7 +41,7 @@ const App = () => {
         }
     };
 
-    // Fetch orders from the Order Management API
+   
     const fetchOrders = async () => {
         try {
             const response = await axios.get('http://localhost:5003/orders');
@@ -71,15 +71,15 @@ const App = () => {
                 console.error("Expected an array but got:", response.data);
                 setUsers([]);
             }
-            setUser ({ name: '' }); // Clear input
-            setError(''); // Clear any previous error
+            setUser ({ name: '' }); 
+            setError(''); 
         } catch (error) {
             console.error("Error creating user:", error);
             setError("Failed to create user.");
         }
     };
 
-    // Fetch data when the component mounts
+  
     useEffect(() => {
         fetchUsers();
         fetchProducts();
@@ -87,10 +87,9 @@ const App = () => {
     }, []);
 
     return (
-        <div>
-            <h1>Welcome to SleekFetch Logistics</h1>
+        <div className="container">
+            <h1>Sleek Fetch Logistics</h1>
             <p>Your reliable runner service for seamless online shopping.</p>
-            <img src="/images/Home.WEBP" alt="Runner in action" className="home-image" />
             <h2>User Management</h2>
             <input
                 type="text"
