@@ -7,9 +7,9 @@ const App = () => {
     const [products, setProducts] = useState([]);
     const [orders, setOrders] = useState([]);
     const [user, setUser ] = useState({ name: '' });
+    const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
 
-    // Fetch users from the User Management API
     const fetchUsers = async () => {
         try {
             const response = await axios.get('http://localhost:5001/users');
@@ -21,11 +21,10 @@ const App = () => {
             }
         } catch (error) {
             console.error("Error fetching users:", error);
-            setError("Failed to fetch users.");
+            setError('Failed to fetch users.');
         }
     };
 
-    // Fetch products from the Product Management API
     const fetchProducts = async () => {
         try {
             const response = await axios.get('http://localhost:5002/products');
@@ -37,11 +36,10 @@ const App = () => {
             }
         } catch (error) {
             console.error("Error fetching products:", error);
-            setError("Failed to fetch products.");
+            setError('Failed to fetch products.');
         }
     };
 
-    // Fetch orders from the Order Management API
     const fetchOrders = async () => {
         try {
             const response = await axios.get('http://localhost:5003/orders');
@@ -53,43 +51,41 @@ const App = () => {
             }
         } catch (error) {
             console.error("Error fetching orders:", error);
-            setError("Failed to fetch orders.");
+            setError('Failed to fetch orders.');
         }
     };
 
-    // Create a new user
     const createUser  = async () => {
-        if (!user.name.trim()) {
-            setError("User  name cannot be empty.");
-            return;
-        }
         try {
             const response = await axios.post('http://localhost:5001/users', user);
             if (Array.isArray(response.data)) {
-                setUsers(response.data);
+                setUsers(response.data); // Update users with the response
             } else {
                 console.error("Expected an array but got:", response.data);
                 setUsers([]);
             }
-            setUser ({ name: '' }); // Clear input
-            setError(''); // Clear any previous error
+            setUser ({ name: '' });
         } catch (error) {
             console.error("Error creating user:", error);
-            setError("Failed to create user.");
+            setError('Failed to create user.');
         }
     };
 
-    // Fetch data when the component mounts
     useEffect(() => {
-        fetchUsers();
-        fetchProducts();
-        fetchOrders();
+        const fetchData = async () => {
+            setLoading(true);
+            await Promise.all([fetchUsers(), fetchProducts(), fetchOrders()]);
+            setLoading(false);
+        };
+        fetchData();
     }, []);
 
     return (
-        <div>
-            <h1>Welcome to SleekFetch Logistics</h1>
+        <div className="container">
+            <h1>Sleek Fetch Logistics</h1>
             <p>Your reliable runner service for seamless online shopping.</p>
+            {loading && <p>Loading...</p>}
+            {error && <p className="error">{error}</p>}
             <h2>User Management</h2>
             <input
                 type="text"
@@ -98,7 +94,6 @@ const App = () => {
                 onChange={(e) => setUser ({ name: e.target.value })}
             />
             <button onClick={createUser }>Add User</button>
-            {error && <p className="error">{error}</p>} {/* Display error message */}
             <h2>Users</h2>
             <ul>
                 {Array.isArray(users) && users.map(u => (
